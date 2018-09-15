@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 const resolve = url => path.resolve(__dirname, `../${url}`)
 
@@ -13,7 +14,7 @@ module.exports = {
   },
   output: {
     path: resolve('dist'),
-    filename: 'js/[name].[hash:4].js'
+    filename: 'js/[name].[chunkhash:4].js'
   },
   resolve: {
     extensions: ['*', '.js', '.vue', '.styl', '.json'],
@@ -54,7 +55,12 @@ module.exports = {
       {
         test: /\.js$/,
         include: resolve('src'),
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            '@babel/preset-env'
+          ]
+        }
       },
       {
         test: /\.styl/,
@@ -92,8 +98,19 @@ module.exports = {
       template: resolve('src/index.html')
     }),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[hash:4].css',
-      chunkFilename: 'css/[id].[hash:4].css'
+      filename: 'css/[name].[chunkhash:4].css',
+      chunkFilename: 'css/[id].[chunkhash:4].css'
+    }),
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /\.style\.css$/g,
+      cssProcessor: require('cssnano'),
+      cssProcessorOptions: { discardComments: { removeAll: true } },
+      canPrint: true
     })
-  ]
+  ],
+  optimization: {
+    minimize: true,
+    minimizer: [new OptimizeCssAssetsPlugin({})],
+
+  }
 }
