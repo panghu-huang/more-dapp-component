@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin')
 
 const resolve = url => path.resolve(__dirname, `../${url}`)
 
@@ -55,12 +56,7 @@ module.exports = {
       {
         test: /\.js$/,
         include: resolve('src'),
-        loader: 'babel-loader',
-        options: {
-          presets: [
-            '@babel/preset-env'
-          ]
-        }
+        loader: 'babel-loader'
       },
       {
         test: /\.styl/,
@@ -110,7 +106,9 @@ module.exports = {
   ],
   optimization: {
     minimize: true,
-    minimizer: [new OptimizeCssAssetsPlugin({})],
-
+    minimizer: [
+      new OptimizeCssAssetsPlugin({}),
+      new UglifyWebpackPlugin()
+    ]
   }
 }
