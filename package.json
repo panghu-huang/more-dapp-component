@@ -1,13 +1,13 @@
 {
   "name": "more-dapp-component",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "component for more dapp",
   "main": "lib/more-dapp-component.js",
   "private": false,
   "scripts": {
     "dev": "webpack-dev-server --config config/config.dev.js --progress --noInfo",
     "build": "rm -rf dist && webpack -p --config config/config.prod.js --progress --noInfo",
-    "build_lib": "rm -rf lib && webpack -p --config config/config.lib.js --progress --noInfo"
+    "build_lib": "rm -rf lib && webpack --config config/config.lib.js --progress --noInfo"
   },
   "keywords": [
     "vue",
@@ -34,6 +34,7 @@
     "style-loader": "^0.23.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
+    "uglifyjs-webpack-plugin": "^2.0.0",
     "vue-loader": "14.2.2",
     "vue-template-compiler": "^2.5.17",
     "webpack": "^4.17.2",

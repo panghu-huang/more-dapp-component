@@ -2,6 +2,8 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin')
 
 const resolve = url => path.resolve(__dirname, `../${url}`)
 
@@ -39,6 +41,7 @@ module.exports = {
                 loader: MiniCssExtractPlugin.loader
               },
               'css-loader',
+              'postcss-loader',
               'stylus-loader'
             ]
           },
@@ -89,12 +92,22 @@ module.exports = {
     ]
   },
   plugins: [
-    // new HtmlWebpackPlugin({
-    //   template: resolve('src/index.html')
-    // }),
     new MiniCssExtractPlugin({
-      filename: 'more-dapp-component.css',
+      filename: 'index.css',
       chunkFilename: '[id].[hash:4].css'
+    }),
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /\.style\.css$/g,
+      cssProcessor: require('cssnano'),
+      cssProcessorOptions: { discardComments: { removeAll: true } },
+      canPrint: true
     })
-  ]
+  ],
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new OptimizeCssAssetsPlugin({}),
+      new UglifyWebpackPlugin({})
+    ]
+  }
 }

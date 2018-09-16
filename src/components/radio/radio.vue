@@ -1,6 +1,6 @@
 <template>
-  <label class="radio">
-    <input type="radio" v-model="checked" :value="value">
+  <label class="radio" :class="{'radio--checked':checked===value}">
+    <input type="radio" class="checked" v-model="checked" :name="name" :value="value">
     <span class="radio__inner">
       <span class="radio__check"/>
     </span>
@@ -13,27 +13,35 @@
 <script>
   export default {
     name: "radio",
-    model: {
-      prop: 'checked',
-      event: 'change'
-    },
     props: {
       value: {
         required: true,
         type: String
       }
     },
-    data() {
-      return {
-        checked: 'checked'
+    watch: {
+      checked(value) {
+        this.setParentPickValue(value)
       }
     },
-    created() {
-      console.log(this.checked, this.value)
+    data() {
+      return {
+        name: null,
+        checked: null
+      }
     },
     methods: {
-      check() {
-
+      setParentPickValue(value) {
+        const parent = this.$parent
+        if (parent && parent.hasOwnProperty('picked')) {
+          parent.picked = value
+        }
+      },
+      setChecked(checked) {
+        this.checked = checked
+      },
+      setName(name) {
+        this.name = name
       }
     }
   }
@@ -47,40 +55,45 @@
     display inline-flex
     align-items center
 
+    &.radio--checked {
+      input[type=radio] {
+
+        & + span.radio__inner {
+          background-color main-color
+
+          span.radio__check {
+            transform rotate(-45deg)
+            transform-origin 40% 40%
+            position absolute
+            z-index 4
+            background-color #ffffff
+            width 0.2rem
+            height 0.1rem
+            left 50%
+            top 50%
+            margin-left -0.1rem
+            margin-top -0.05rem
+
+            &:after {
+              content ''
+              position absolute
+              height 0.06rem
+              top -0.01rem
+              left 0.05rem
+              right -0.01rem
+              background-color main-color
+            }
+          }
+        }
+      }
+    }
+
     input[type=radio] {
       position absolute
       z-index 1
       visibility hidden
       width 0.01rem
       height 0.01rem
-
-      &[checked] + span.radio__inner {
-        background-color main-color
-
-        span.radio__check {
-          transform rotate(-45deg)
-          transform-origin 40% 40%
-          position absolute
-          z-index 4
-          background-color #ffffff
-          width 0.2rem
-          height 0.1rem
-          left 50%
-          top 50%
-          margin-left -0.1rem
-          margin-top -0.05rem
-
-          &:after {
-            content ''
-            position absolute
-            height 0.06rem
-            top -0.01rem
-            left 0.05rem
-            right -0.01rem
-            background-color main-color
-          }
-        }
-      }
     }
 
     span.radio__inner {

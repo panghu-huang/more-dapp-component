@@ -12,9 +12,10 @@
         this is tip
         <tip types="container highlight">highlight tip</tip>
       </tip>
-      <radio-group>
-        <radio value="name">Name</radio>
-        <radio value="value">Value</radio>
+      <p>{{ picked }}</p>
+      <radio-group name="company" v-model="picked">
+        <radio value="more">More</radio>
+        <radio value="fibos">Fibos</radio>
       </radio-group>
       <form action="">
         <form-item label="Label">
@@ -30,18 +31,9 @@
     name: "app",
     data() {
       return {
-        message: 'null'
+        message: null,
+        picked: 'more'
       }
-    },
-    beforeCreate() {
-      const width = window.document.documentElement.clientWidth || window.screen.availWidth
-      const dpr = window.devicePixelRatio || 1
-      const fontSize = 100 * Math.min(width, 480) / 750 * dpr
-      document.querySelector('html').setAttribute('style', 'font-size:' + fontSize.toFixed(2) + 'px')
-      const viewport = document.querySelector('meta[name=viewport]')
-      const scale = (1 / dpr).toFixed(2)
-      viewport.setAttribute('content', 'width=' + dpr * width + ',initial-scale='
-        + scale + ',maximum-scale=' + scale + ', minimum-scale=' + scale + ',user-scalable=no')
     },
     methods: {
       showMessage() {

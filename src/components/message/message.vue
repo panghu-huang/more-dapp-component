@@ -11,7 +11,29 @@
     data() {
       return {
         visible: false,
-        message: null
+        message: null,
+        delay: 3000
+      }
+    },
+    watch: {
+      visible(visible) {
+        if (visible) {
+          this.startTimer()
+        }
+      },
+      message(message) {
+        this.startTimer()
+      }
+    },
+    methods: {
+      startTimer() {
+        if (this.timer) {
+          clearTimeout(this.timer)
+          this.timer = null
+        }
+        this.timer = setTimeout(() => {
+          this.visible = false
+        }, this.delay)
       }
     }
   }
