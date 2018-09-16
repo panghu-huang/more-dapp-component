@@ -8,7 +8,7 @@
 # install dependencies
 yarn
 
-# serve with hot reload at localhost:8080
+# example run at localhost:3000
 yarn dev
 
 # build for production with minification
@@ -40,7 +40,7 @@ Vue.use(MoreDAppComponent)
         title
       </section-title>
       <more-input withClear v-model="message"/>
-      <more-button @press="showMessage">show message</more-button>
+      <more-button @click="showMessage">show message</more-button>
       <tip types="with-dot container">
         this is tip
         <tip types="highlight">highlight tip</tip>

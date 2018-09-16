@@ -7,7 +7,7 @@
         title
       </section-title>
       <more-input withClear v-model="message"/>
-      <more-button @press="showMessage">show message</more-button>
+      <more-button @click="showMessage">show message</more-button>
       <tip types="with-dot container">
         this is tip
         <tip types="highlight">highlight tip</tip>
