@@ -15,7 +15,7 @@
     },
     methods: {
       handleClick(ev) {
-        this.$emit('press', ev)
+        this.$emit('click', ev)
       }
     }
   }
