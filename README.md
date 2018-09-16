@@ -20,8 +20,11 @@ yarn build_lib
 ## Usage
 
 ``` js
+import Vue from 'vue'
 import MoreDAppComponent from 'more-dapp-component'
 import 'more-dapp-component/lib/index.css'
+
+Vue.use(MoreDAppComponent)
 
 // your code
 ```
