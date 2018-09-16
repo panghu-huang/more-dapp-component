@@ -1,27 +1,27 @@
 <template>
   <page-container>
-    <page-title>Fibos</page-title>
+    <page-title>Page title</page-title>
     <section-container>
-      this is container
+      section container
       <section-title>
         title
       </section-title>
       <more-input withClear v-model="message"/>
-      <more-button @press="showMessage">button</more-button>
-      <tip types="with-dot">
+      <more-button @press="showMessage">show message</more-button>
+      <tip types="with-dot container">
         this is tip
-        <tip types="container highlight">highlight tip</tip>
+        <tip types="highlight">highlight tip</tip>
       </tip>
-      <p>{{ picked }}</p>
-      <radio-group name="company" v-model="picked">
-        <radio value="more">More</radio>
-        <radio value="fibos">Fibos</radio>
-      </radio-group>
       <form action="">
-        <form-item label="Label">
-          content
+        <form-item label="Your company">
+          {{ picked }}
         </form-item>
       </form>
+      <radio-group name="company" v-model="picked">
+        <radio value="more">More</radio>
+        <radio value="alibaba">Alibaba</radio>
+        <radio value="tencent">Tencent</radio>
+      </radio-group>
     </section-container>
   </page-container>
 </template>
@@ -38,7 +38,11 @@
     methods: {
       showMessage() {
         const { message } = this
-        this.$message(message)
+        if (message) {
+          this.$message(message)
+        } else {
+          this.$message('message is required')
+        }
       }
     }
   }
