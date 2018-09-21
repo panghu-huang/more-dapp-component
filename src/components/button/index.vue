@@ -1,10 +1,16 @@
 <template>
   <button class="btn" :class="['btn-'+type,className]" @click="handleClick">
-    <slot/>
+    <span v-if="loading" class="loading-wrapper">
+      <loading-circle></loading-circle>
+      <span class="loading-text">{{ loadingText }}</span>
+    </span>
+    <slot v-else/>
   </button>
 </template>
 
 <script>
+  import LoadingCircle from '../loading-circle'
+
   export default {
     name: "more-button",
     props: {
@@ -12,15 +18,29 @@
         type: String,
         default: 'default'
       },
-      className:{
-        type:String,
-        default:''
+      className: {
+        type: String,
+        default: ''
+      },
+      loading: {
+        type: Boolean,
+        default: false
+      },
+      loadingText: {
+        type: String,
+        default: '加载中...'
       }
     },
     methods: {
       handleClick(ev) {
-        this.$emit('click', ev)
+        const { loading } = this
+        if (!loading) {
+          this.$emit('click', ev)
+        }
       }
+    },
+    components: {
+      LoadingCircle
     }
   }
 </script>
@@ -50,6 +70,15 @@
       border-color #eeeeee
       background-color #EEEEEE
       color #B9BAC5
+    }
+
+    .loading-wrapper {
+      display: flex
+      justify-content center
+      align-items center
+      .loading-text {
+        margin-left 0.04rem
+      }
     }
   }
 </style>
