@@ -7,5 +7,7 @@ export { default as MoreInput } from './input'
 export { default as Tip } from './tip'
 export { default as FormItem } from './form-item'
 export { default as Message } from './message'
+export { default as LoadingCircle } from './loading-circle'
+export { default as LoadingContainer } from './loading-container'
 
 export * from './radio'

@@ -1,6 +1,6 @@
 {
   "name": "more-dapp-component",
-  "version": "0.0.3",
+  "version": "0.0.7",
   "description": "component for more dapp",
   "main": "lib/more-dapp-component.js",
   "private": false,
