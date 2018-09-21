@@ -1,5 +1,5 @@
 <template>
-  <button class="btn" :class="'btn'+type" @click="handleClick">
+  <button class="btn" :class="['btn-'+type,className]" @click="handleClick">
     <slot/>
   </button>
 </template>
@@ -11,6 +11,10 @@
       type: {
         type: String,
         default: 'default'
+      },
+      className:{
+        type:String,
+        default:''
       }
     },
     methods: {

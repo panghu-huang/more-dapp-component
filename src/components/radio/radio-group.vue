@@ -1,5 +1,5 @@
 <template>
-  <div class="radio-group">
+  <div class="radio-group" :class="className">
     <slot/>
   </div>
 </template>
@@ -12,8 +12,11 @@
         type: String
       },
       value: {
-        type: String,
-        required: true
+        type: String
+      },
+      className:{
+        type:String,
+        default:''
       }
     },
     data() {
