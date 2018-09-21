@@ -1,4 +1,4 @@
-<template functional>
+<template>
   <main class="page-container" :class="className">
     <slot/>
   </main>
@@ -6,6 +6,7 @@
 
 <script>
   export default {
-    name: "PageContainer"
+    name: "PageContainer",
+    props:['className']
   }
 </script>

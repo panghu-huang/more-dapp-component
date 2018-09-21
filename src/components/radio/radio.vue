@@ -1,5 +1,5 @@
 <template>
-  <label class="radio" :class="{'radio--checked':checked===value}">
+  <label class="radio" :class="[{'radio--checked':checked===value},className]">
     <input type="radio" class="checked" v-model="checked" :name="name" :value="value">
     <span class="radio__inner">
       <span class="radio__check"/>
@@ -17,6 +17,10 @@
       value: {
         required: true,
         type: String
+      },
+      className:{
+        type:String,
+        default:''
       }
     },
     watch: {

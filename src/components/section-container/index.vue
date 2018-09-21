@@ -1,12 +1,13 @@
-<template functional>
-  <section class="section-container">
+<template>
+  <section class="section-container" :class="className">
     <slot/>
   </section>
 </template>
 
 <script>
   export default {
-    name: "section-container"
+    name: "section-container",
+    props:['className']
   }
 </script>
 
