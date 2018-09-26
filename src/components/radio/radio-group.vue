@@ -14,9 +14,9 @@
       value: {
         type: String
       },
-      className:{
-        type:String,
-        default:''
+      className: {
+        type: String,
+        default: ''
       }
     },
     data() {
@@ -26,12 +26,18 @@
     },
     watch: {
       picked(value) {
-        this.setChildrenChecked(value)
-        this.$emit('input', value)
+        this.setCheckedAndEmit(value)
+      },
+      value(value) {
+        this.setCheckedAndEmit(value)
       }
     },
     mounted() {
-      const { $children: children, value, name } = this
+      const {
+        $children: children,
+        value,
+        name
+      } = this
       const default_name = `default_name_${Date.now()}`
       const child_field_name = name || default_name
       children.forEach(child => {
@@ -40,8 +46,14 @@
       })
     },
     methods: {
+      setCheckedAndEmit(value) {
+        this.setChildrenChecked(value)
+        this.$emit('input', value)
+      },
       setChildrenChecked(checked) {
-        const { $children: children } = this
+        const {
+          $children: children
+        } = this
         children.forEach(child => {
           child.setChecked(checked)
         })
