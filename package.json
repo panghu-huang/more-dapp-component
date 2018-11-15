@@ -3,6 +3,7 @@
   "version": "0.0.8",
   "description": "component for more dapp",
   "main": "lib/more-dapp-component.js",
+  "typings": "src/index.d.ts",
   "private": false,
   "scripts": {
     "dev": "webpack-dev-server --config config/config.dev.js --progress --noInfo",
