@@ -1,10 +1,10 @@
 <template>
-  <label class="radio" :class="[{'radio--checked':checked===value},className]">
-    <input type="radio" class="checked" v-model="checked" :name="name" :value="value">
+  <label class="radio" :class="cls">
+    <input type="radio" class="checked" v-model="checked" :name="name" :value="value" :disabled="disabled">
     <span class="radio__inner">
       <span class="radio__check"/>
     </span>
-    <span>
+    <span class="radio__content">
       <slot/>
     </span>
   </label>
@@ -18,9 +18,13 @@
         required: true,
         type: String
       },
-      className:{
-        type:String,
-        default:''
+      className: {
+        type: String,
+        default: ''
+      },
+      disabled: {
+        type: Boolean,
+        default: false
       }
     },
     watch: {
@@ -32,6 +36,19 @@
       return {
         name: null,
         checked: null
+      }
+    },
+    computed: {
+      cls() {
+        const { disabled, checked, className, value } = this
+        let cls = [className]
+        if (disabled) {
+          cls.push('radio--disabled')
+        }
+        if (checked === value) {
+          cls.push('radio--checked')
+        }
+        return cls.join(' ')
       }
     },
     methods: {
@@ -114,6 +131,33 @@
       border 0.02rem solid main-color
       transition all 0.2s
       margin-right 0.12rem
+    }
+
+    _radio_disabled_color = #eeeeee
+    &.radio--disabled {
+      span.radio__content {
+        color _radio_disabled_color
+      }
+      span.radio__inner {
+        border 0.04rem solid _radio_disabled_color
+      }
+      input[type=radio] {
+        & + span.radio__inner {
+          span.radio__check {
+            background-color #ffffff
+            &:after {
+              background-color _radio_disabled_color
+            }
+          }
+        }
+      }
+      &.radio--checked {
+        input[type=radio] {
+          & + span.radio__inner {
+            background-color _radio_disabled_color
+          }
+        }
+      }
     }
   }
 </style>
