@@ -56,7 +56,11 @@
     .message {
       display block
       color #ffffff
+      padding 0 0.24rem
       font-size 0.32rem
+      white-space nowrap
+      overflow hidden
+      text-overflow ellipsis
     }
 
     &.message-container--show {
