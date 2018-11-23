@@ -41,7 +41,7 @@
         if (message) {
           this.$message(message)
         } else {
-          this.$message('message is required')
+          this.$message('message is required\n'.repeat(5))
         }
       }
     }

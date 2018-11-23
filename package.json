@@ -1,10 +1,10 @@
 {
   "name": "more-dapp-component",
-  "version": "0.0.8",
+  "version": "0.0.12",
   "description": "component for more dapp",
+  "private": false,
   "main": "lib/more-dapp-component.js",
   "typings": "src/index.d.ts",
-  "private": false,
   "scripts": {
     "dev": "webpack-dev-server --config config/config.dev.js --progress --noInfo",
     "build": "rm -rf dist && webpack -p --config config/config.prod.js --progress --noInfo",
